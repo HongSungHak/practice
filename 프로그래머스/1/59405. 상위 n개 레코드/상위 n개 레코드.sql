@@ -1,2 +1,2 @@
 -- 코드를 입력하세요
-SELECT NAME FROM ANIMAL_INS WHERE DATETIME = (SELECT min(DATETIME) FROM ANIMAL_INS);
+SELECT name from animal_ins order by DATETIME limit 1;
