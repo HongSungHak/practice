@@ -1,10 +1,10 @@
 # [level 1] x만큼 간격이 있는 n개의 숫자 - 12954 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12954?language=cpp) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12954) 
 
 ### 성능 요약
 
-메모리: 4.18 MB, 시간: 0.25 ms
+메모리: 3.72 MB, 시간: 0.38 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 08월 30일 21:41:30
+2024년 10월 09일 21:08:58
 
 ### 문제 설명
 
