@@ -3,25 +3,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-
 public class Main {
+
+    static class Customer {
+         int age;
+         String name;
+
+        public Customer(final int age, final String name) {
+            this.age = age;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return age + " " + name;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        String[][] arr = new String[N][2];
-        StringTokenizer st;
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            arr[i][0] = st.nextToken();;
-            arr[i][1] = st.nextToken();;
-        }
-        Arrays.sort(arr, (s1, s2) -> Integer.parseInt(s1[0]) - Integer.parseInt(s2[0]));
         StringBuilder sb = new StringBuilder();
-
-        for(int i = 0; i < N; i++) {
-            sb.append(arr[i][0]).append(' ').append(arr[i][1]).append('\n');
+        int N = Integer.parseInt(br.readLine());
+        Customer[] customers = new Customer[N];
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            customers[i] = new Customer(Integer.parseInt(st.nextToken()), st.nextToken());
         }
 
+        Arrays.sort(customers, Comparator.comparingInt(s -> s.age));
+        for (int i = 0; i < N; i++) {
+            sb.append(customers[i]).append("\n");
+        }
         System.out.println(sb);
     }
 }
