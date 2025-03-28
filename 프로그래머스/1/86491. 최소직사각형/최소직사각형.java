@@ -1,19 +1,11 @@
-import java.util.*;
 class Solution {
     public int solution(int[][] sizes) {
-        
-        int max1 = Integer.MIN_VALUE; 
-        int max2 = Integer.MIN_VALUE;
-        
-        for (int[] arr : sizes) {
-            Arrays.sort(arr);
+        int length = 0, height = 0;
+        for (int[] card : sizes) {
+            length = Math.max(length, Math.max(card[0], card[1]));
+            height = Math.max(height, Math.min(card[0], card[1]));
         }
-        for (int i = 0; i < sizes.length; i++) {
-            for (int j = 0; j < 2; j++) {
-                if (max1 < sizes[i][0]) max1 = sizes[i][0];
-                if (max2 < sizes[i][1]) max2 = sizes[i][1];
-            }
-        }
-        return max1 * max2;
+        int answer = length * height;
+        return answer;
     }
 }
