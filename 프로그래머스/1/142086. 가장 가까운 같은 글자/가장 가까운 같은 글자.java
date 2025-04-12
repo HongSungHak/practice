@@ -1,13 +1,22 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(String s) {
-        int[] answer = new int[s.length()];
-        HashMap<Character,Integer> map = new HashMap<>();
+        Map<Character, Integer> lastSeenIndex = new HashMap<>();
+        int[] result = new int[s.length()];
+
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            answer[i] = i - map.getOrDefault(c, i+1);
-            map.put(c,i);
+            char currentChar = s.charAt(i);
+
+            if (lastSeenIndex.containsKey(currentChar)) {
+                result[i] = i - lastSeenIndex.get(currentChar);
+            } else {
+                result[i] = -1;
+            }
+
+            lastSeenIndex.put(currentChar, i);
         }
-        return answer;
+
+        return result;
     }
 }
