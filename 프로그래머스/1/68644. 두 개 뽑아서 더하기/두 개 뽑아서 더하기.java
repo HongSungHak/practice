@@ -7,6 +7,9 @@ class Solution {
                 set.add(numbers[i] + numbers[j]);
             }
         }
-        return set.stream().sorted().mapToInt(Integer::intValue).toArray();
+        return set.stream()
+                  .mapToInt(Integer::intValue)
+                  .sorted()
+                  .toArray();
     }
 }
