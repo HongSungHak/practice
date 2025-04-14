@@ -1,25 +1,27 @@
-public class Solution {
-    public static String solution(String number, int k) {
-        StringBuilder answer = new StringBuilder();
-        int idx = 0;
-        int sizeOfAnswer = number.length() - k;
-        
-        for (int i = 0; i < sizeOfAnswer; i++) {
-            int insertValue = 0;
-            for (int j = idx; j <= k + i; j++) {
-                int temp = number.charAt(j) - '0';
-                if (temp > insertValue) {
-                    insertValue = temp;
-                    idx = j + 1;
-                }
-            }
+import java.util.*;
 
-            answer.append(insertValue);
-            if (answer.length() == sizeOfAnswer) {
-                break;
+class Solution {
+    public String solution(String number, int k) {
+        Stack<Character> stack = new Stack<>();
+        
+        for (char num : number.toCharArray()) {
+            while (!stack.isEmpty() && k > 0 && stack.peek() < num) {
+                stack.pop();
+                k--;
             }
+            stack.push(num);
         }
 
-        return answer.toString();
+        while (k > 0) {
+            stack.pop();
+            k--;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : stack) {
+            sb.append(c);
+        }
+
+        return sb.toString();
     }
 }
