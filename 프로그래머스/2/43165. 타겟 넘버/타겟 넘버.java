@@ -1,16 +1,22 @@
 class Solution {
-    public int findTargetNumber(int[] numbers, int target, int index, int sum) {
+    int[] numbers;
+    int target;
+    int answer;
+    void dfs(int index, int sum) {
+        //1. 탈출 조건
         if (index == numbers.length) {
-            return sum == target ? 1 : 0;
+            if (sum == target) answer++;
+            return;
         }
-        
-        int add = findTargetNumber(numbers, target, index + 1, sum + numbers[index]);
-        int subtract = findTargetNumber(numbers, target, index + 1, sum - numbers[index]);
-        
-        return add + subtract;
+        //2. 수행 동작
+        dfs(index + 1, sum + numbers[index]);
+        dfs(index + 1, sum - numbers[index]);
     }
-
     public int solution(int[] numbers, int target) {
-        return findTargetNumber(numbers, target, 0, 0);
+        answer = 0;
+        this.numbers = numbers;
+        this.target = target;
+        dfs(0,0);
+        return answer;
     }
 }
