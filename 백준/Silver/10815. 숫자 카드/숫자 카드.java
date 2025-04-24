@@ -4,18 +4,37 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+
+        Map<Integer, Integer> frequencyMap = readFrequencyMap(sc);
+        printQueryResults(sc, frequencyMap);
+
+        sc.close();
+    }
+
+    private static Map<Integer, Integer> readFrequencyMap(Scanner sc) {
+        int inputCount = sc.nextInt();
         Map<Integer, Integer> map = new HashMap<>();
-        int N = sc.nextInt();
-        for (int i = 0; i < N; i++) {
-            int key = sc.nextInt();
-            map.put(key, map.getOrDefault(key, 0) + 1);
+
+        for (int i = 0; i < inputCount; i++) {
+            int number = sc.nextInt();
+            map.put(number, map.getOrDefault(number, 0) + 1);
         }
-        int M = sc.nextInt();
-        for (int i = 0; i < M; i++) {
-            int key = sc.nextInt();
-            System.out.print(map.getOrDefault(key, 0) + " ");
+
+        return map;
+    }
+
+    private static void printQueryResults(Scanner sc, Map<Integer, Integer> map) {
+        int queryCount = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < queryCount; i++) {
+            int number = sc.nextInt();
+            sb.append(map.getOrDefault(number, 0)).append(" ");
         }
+
+        System.out.println(sb.toString().trim());
     }
 }
