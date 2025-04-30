@@ -5,15 +5,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        Queue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                pq.add(sc.nextInt());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int i = 0; i < N * N; i++) {
+            int num = sc.nextInt();
+            minHeap.add(num);
+            if (minHeap.size() > N) {
+                minHeap.poll(); 
             }
         }
-        for (int i = 0; i < N-1; i++) {
-            pq.poll();
-        }
-        System.out.println(pq.peek());
+
+        System.out.println(minHeap.peek()); 
     }
 }
