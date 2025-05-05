@@ -1,22 +1,22 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(int[] arr, int k) {
-        List<Integer> result = new ArrayList<>();
-        Set<Integer> seen = new HashSet<>();
-
-        for (int num : arr) {
-            if (!seen.contains(num)) {
-                seen.add(num);
-                result.add(num);
-                if (result.size() == k) break;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (list.isEmpty() || !list.contains(arr[i])) {
+                list.add(arr[i]);
+            }
+            if (list.size() == k) {
+                break;
             }
         }
-
-        while (result.size() < k) {
-            result.add(-1);
+        
+        while(list.size() != k) {
+            list.add(-1);
         }
-
-        return result.stream().mapToInt(i -> i).toArray();
+        
+        return list.stream()
+                   .mapToInt(Integer::intValue)
+                   .toArray();
     }
 }
