@@ -12,8 +12,11 @@ public class Main {
         }
 
         Arrays.sort(arr);
+
+        StringBuilder sb = new StringBuilder();
         for (int i = arr.length - 1; i >= 0; i--) {
-            System.out.println(arr[i]);
+            sb.append(arr[i]).append('\n');
         }
+        System.out.print(sb);
     }
 }
