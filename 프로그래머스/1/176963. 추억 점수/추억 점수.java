@@ -1,27 +1,20 @@
 import java.util.*;
 class Solution {
     public int[] solution(String[] name, int[] yearning, String[][] photo) {
-        int[] answer = new int[photo.length];
+        int[] arr = new int[photo.length];
         Map<String, Integer> map = new HashMap<>();
-        
         for (int i = 0; i < name.length; i++) {
             map.put(name[i], yearning[i]);
         }
-        
         for (int i = 0; i < photo.length; i++) {
-            String[] person = photo[i];
-            int sum = 0;
-
-            for (int j = 0; j < person.length; j++) {
-                String personName = person[j];
-
-                if (map.containsKey(personName)) {
-                    sum += map.get(personName);
+            for (int j = 0; j < photo[i].length; j++) {
+                if (map.containsKey(photo[i][j])) {
+                    arr[i] += map.get(photo[i][j]);
+                } else {
+                    continue;
                 }
-
             }
-            answer[i] = sum;
         }
-        return answer;
+        return arr;
     }
 }
