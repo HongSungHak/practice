@@ -1,21 +1,22 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        sc.close();
-        Queue<Integer> q = new LinkedList<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        Deque<Integer> dq = new ArrayDeque<>();
         for (int i = 1; i <= N; i++) {
-            q.add(i);
+            dq.addFirst(i);
         }
-        while (q.size() != 1) {
-            Integer a = q.poll();
-            Integer b = q.poll();
-            q.add(b);
+        while (dq.size() > 1) {
+            dq.removeLast();
+            Integer lastNum = dq.pollLast();
+            dq.addFirst(lastNum);
         }
-        System.out.println(q.peek());
+        System.out.println(dq.getFirst());
     }
 }
