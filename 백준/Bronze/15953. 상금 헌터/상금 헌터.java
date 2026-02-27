@@ -1,45 +1,37 @@
 import java.io.*;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
-
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine());
-        StringTokenizer st;
-        while (T --> 0) {
-            int prizeMoney = 0;
-            st = new StringTokenizer(br.readLine());
-            int firstCom = Integer.parseInt(st.nextToken());
-            int secondCom = Integer.parseInt(st.nextToken());
-            if (firstCom == 1) {
-                prizeMoney += 5000000;
-            } else if (firstCom == 2 || firstCom == 3) {
-                prizeMoney += 3000000;
-            } else if (firstCom >= 4 && firstCom <= 6) {
-                prizeMoney += 2000000;
-            } else if (firstCom >= 7 && firstCom <= 10) {
-                prizeMoney += 500000;
-            } else if (firstCom >= 11 && firstCom <= 15) {
-                prizeMoney += 300000;
-            } else if (firstCom >= 16 && firstCom <= 21) {
-                prizeMoney += 100000;
-            }
 
-            if (secondCom == 1) {
-                prizeMoney += 5120000;
-            } else if (secondCom == 2 || secondCom == 3) {
-                prizeMoney += 2560000;
-            } else if (secondCom >= 4 && secondCom <= 7) {
-                prizeMoney += 1280000;
-            } else if (secondCom >= 8 && secondCom <= 15) {
-                prizeMoney += 640000;
-            } else if (secondCom >= 16 && secondCom <= 31)  {
-                prizeMoney += 320000;
-            }
+    static final int[] FIRST_CNT  = {1, 2, 3, 4, 5, 6};
+    static final int[] FIRST_MONEY= {5_000_000, 3_000_000, 2_000_000, 500_000, 300_000, 100_000};
 
-            System.out.println(prizeMoney);
+    static final int[] SECOND_CNT  = {1, 2, 4, 8, 16};
+    static final int[] SECOND_MONEY= {5_120_000, 2_560_000, 1_280_000, 640_000, 320_000};
+
+    static int prize(int rank, int[] cnt, int[] money) {
+        if (rank == 0) return 0;
+        int sum = 0;
+        for (int i = 0; i < cnt.length; i++) {
+            sum += cnt[i];
+            if (rank <= sum) return money[i];
         }
+        return 0;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
+
+        while (T-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            int ans = prize(a, FIRST_CNT, FIRST_MONEY) + prize(b, SECOND_CNT, SECOND_MONEY);
+            sb.append(ans).append('\n');
+        }
+        System.out.print(sb.toString());
     }
 }
