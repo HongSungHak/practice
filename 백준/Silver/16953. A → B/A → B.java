@@ -1,25 +1,24 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        long A = sc.nextLong();
-        long B = sc.nextLong();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        long before = Long.parseLong(st.nextToken());
+        long after = Long.parseLong(st.nextToken());
         int count = 1;
-
-        while (B > A) {
-            if (B % 10 == 1) {
-                B /= 10;
-            } else if (B % 2 == 0) {
-                B /= 2;
+        while (before < after) {
+            if (after % 10 == 1) {
+                after /= 10;
+            } else if (after % 2 == 0){
+                after /= 2;
             } else {
                 break;
             }
             count++;
         }
-
-        if (B == A) {
+        if (before == after) {
             System.out.println(count);
         } else {
             System.out.println(-1);
