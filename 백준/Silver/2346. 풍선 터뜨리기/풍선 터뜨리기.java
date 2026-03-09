@@ -2,41 +2,47 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+
+    static class Balloon {
+        int idx;
+        int move;
+
+        Balloon(int idx, int move) {
+            this.idx = idx;
+            this.move = move;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Deque<int[]> dq = new ArrayDeque<>();
-        StringBuilder sb = new StringBuilder();
+        Deque<Balloon> dq = new ArrayDeque<>();
+
         for (int i = 1; i <= N; i++) {
-            int step = Integer.parseInt(st.nextToken());
-            dq.addFirst(new int[]{i, step});
+            dq.offerLast(new Balloon(i, Integer.parseInt(st.nextToken())));
         }
+
+        StringBuilder sb = new StringBuilder();
+
         while (!dq.isEmpty()) {
-
-            int[] num = dq.pollLast();
-            int idx = num[0];
-            int step = num[1];
-
-            sb.append(idx).append(" ");
+            Balloon cur = dq.pollFirst();
+            sb.append(cur.idx).append(' ');
 
             if (dq.isEmpty()) break;
 
-            if (step > 0) {
-                for (int i = 0; i < step - 1; i++) {
-                    int[] ballon = dq.pollLast();
-                    dq.addFirst(ballon);
+            if (cur.move > 0) {
+                for (int i = 0; i < cur.move - 1; i++) {
+                    dq.offerLast(dq.pollFirst());
                 }
             } else {
-                step *= -1;
-                for (int i = 0; i < step; i++) {
-                    int[] ballon = dq.pollFirst();
-                    dq.addLast(ballon);
+                for (int i = 0; i < -cur.move; i++) {
+                    dq.offerFirst(dq.pollLast());
                 }
             }
         }
+
         System.out.println(sb);
     }
 }
