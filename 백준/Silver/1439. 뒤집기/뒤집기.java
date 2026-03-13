@@ -1,23 +1,23 @@
-import java.util.Scanner;
+import java.io.*;
+
+
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-
-        int count0 = 0;
-        int count1 = 0;
-
-        if (s.charAt(0) == '0') count0++;
-        else count1++;
-
-        for (int i = 1; i < s.length(); i++) {
-            if (s.charAt(i) != s.charAt(i - 1)) {
-                if (s.charAt(i) == '0') count0++;
-                else count1++;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char[] arr = br.readLine().toCharArray();
+        int zeroGroup = 0;
+        int oneGroup = 0;
+        if (arr[0] == '0') zeroGroup++;
+        else oneGroup++;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] != arr[i]) {
+                if (arr[i] == '0') zeroGroup++;
+                else oneGroup++;
             }
         }
+        int min = Math.min(zeroGroup, oneGroup);
+        System.out.println(min);
 
-        System.out.println(Math.min(count0, count1));
     }
 }
