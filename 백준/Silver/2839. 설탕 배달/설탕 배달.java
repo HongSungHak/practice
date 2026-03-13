@@ -1,19 +1,25 @@
-import java.util.*;
 import java.io.*;
 
 
+
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int cnt = -1;
-        for (int five = N / 5; five >= 0; five--) {
-            int remain = N - (five * 5);
-            if (remain % 3 == 0) {
-                cnt = five + (remain / 3);
+        int count = 0;
+        while (N > 0) {
+            if (N % 5 == 0) {
+                count += N / 5;
                 break;
+            } else {
+                N -= 3;
+                count++;
             }
         }
-        System.out.println(cnt);
+        if (N < 0) {
+            System.out.println(-1);
+            return;
+        }
+        System.out.println(count);
     }
 }
