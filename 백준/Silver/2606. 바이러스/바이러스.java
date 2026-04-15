@@ -1,34 +1,33 @@
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 
 public class Main {
-    static boolean[][] graph;
+    static int[][] matrix;
     static boolean[] visited;
-    static int N, M;
-    static int answer;
+    static int count = 0;
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        matrix = new int[N+1][N+1];
+        visited = new boolean[N+1];
 
-    public static void dfs(int index) {
-        answer++;
-        visited[index] = true;
-        for (int i = 1; i <= N; i++) {
-            if (!visited[i] && graph[index][i])
-                dfs(i);
+        for (int i = 1; i <= M; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            matrix[x][y] = matrix[y][x] = 1;
         }
+        bfs(1);
+        System.out.println(count - 1);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
-        graph = new boolean[N + 1][N + 1];
-        visited = new boolean[N + 1];
-
-        int x, y;
-        for (int i = 0; i < M; i++) {
-            x = sc.nextInt();
-            y = sc.nextInt();
-            graph[x][y] = graph[y][x] = true;
+    private static void bfs(int num) {
+        visited[num] = true;
+        count++;
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[num][i] == 1 && !visited[i]) {
+                bfs(i);
+            }
         }
-        dfs(1);
-        System.out.println(answer - 1);
     }
 }
