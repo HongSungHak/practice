@@ -1,11 +1,11 @@
-import java.time.LocalDate;
-
+import java.util.stream.IntStream;
 class Solution {
-    private String[] week = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
-
-    public String solution(int month, int day) {
-        LocalDate date = LocalDate.of(2016, month, day);
-        int dayOfWeek = date.getDayOfWeek().ordinal();
-        return week[dayOfWeek];
+    public String solution(int a, int b) {
+        String[] days = {"SUN","MON","TUE","WED","THU","FRI","SAT"};
+        int[] months = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int sum = IntStream.range(0, a - 1).map(i -> months[i]).sum() + b;
+        int index = (sum + 4) % 7;
+        String answer = days[index];
+        return answer;
     }
 }
